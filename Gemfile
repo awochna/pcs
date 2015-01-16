@@ -49,3 +49,4 @@ end
 
 gem 'mongoid', '4.0.0'
 gem 'devise', '3.4.1'
+gem 'foundation-rails'
