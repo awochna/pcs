@@ -1,6 +1,14 @@
 class Character
   include Mongoid::Document
   belongs_to :user
+  embeds_one :combat_block
+  embeds_one :skillset
+  embeds_one :inventory
+  embeds_many :equipments
+  embeds_many :effects
+  embeds_many :conditions
+  embeds_many :speeds
+  accepts_nested_attributes_for :skillset
   field :name, type: String
   field :nickname, type: String
   field :experience, type: Integer
@@ -23,6 +31,10 @@ class Character
   field :wisdom, type: Integer
   field :charisma, type: Integer
   field :favored_class, type: String
+  field :hitpoints, type: Integer
+  field :fortitude, type: Integer
+  field :reflex, type: Integer
+  field :will, type: Integer
 
   def strength_mod
     strength_over_avg = self.strength - 10
@@ -52,5 +64,20 @@ class Character
   def charisma_mod
     charisma_over_avg = self.charisma - 10
     charisma_over_avg / 2
+  end
+
+  def calculated_fortitude
+    self.fortitude + constitution_mod
+  end
+
+  def calculated_reflex
+    self.reflex + dexterity_mod
+  end
+
+  def calculated_will
+    self.will + wisdom_mod
+  end
+
+  def perception
   end
 end

@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :low_level_warrior, class: :character do
-    # Change this!
-    user 1
+    user 
     name "Vorloth"
     experience 1
     level 1

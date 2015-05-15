@@ -31,6 +31,18 @@ RSpec.describe Character, type: :model do
   it { is_expected.to respond_to :wisdom }
   it { is_expected.to respond_to :charisma }
   it { is_expected.to respond_to :favored_class }
+  it { is_expected.to respond_to :hitpoints }
+  it { is_expected.to respond_to :speeds }
+  it { is_expected.to respond_to :fortitude }
+  it { is_expected.to respond_to :reflex }
+  it { is_expected.to respond_to :will }
+  it { is_expected.to respond_to :perception }
+  it { is_expected.to respond_to :combat_block }
+  it { is_expected.to respond_to :skillset }
+  it { is_expected.to respond_to :equipments }
+  it { is_expected.to respond_to :inventory }
+  it { is_expected.to respond_to :effects }
+  it { is_expected.to respond_to :conditions }
 
   describe "low level warrior" do
 
@@ -77,6 +89,37 @@ RSpec.describe Character, type: :model do
         subject.save
         expect(subject.strength_mod).to eq 4
       end
+    end
+
+    describe "has calculable saving throws" do
+
+      specify "for fortitude" do
+        subject.constitution = 16
+        subject.fortitude = 2
+        subject.save
+        expect(subject.calculated_fortitude).to eq 5
+      end
+
+      specify "for reflex" do
+        subject.dexterity = 12
+        subject.reflex = 2
+        subject.save
+        expect(subject.calculated_reflex).to eq 3
+      end
+
+      specify "for will" do
+        subject.wisdom = 8
+        subject.will = 1
+        subject.save
+        expect(subject.calculated_will).to eq 0
+      end
+    end
+
+    specify "has calculable perception" do
+      subject.skillset.perception = 1
+      subject.wisdom = 12
+      subject.save
+      expect(subject.perception).to eq 2
     end
   end
 end

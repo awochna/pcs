@@ -47,6 +47,7 @@ group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails', '4.5.0'
   gem 'capybara'
+  gem 'database_cleaner'
 end
 
 gem 'mongoid', '4.0.0'
