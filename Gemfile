@@ -42,8 +42,10 @@ group :development, :test do
 end
 
 group :test do
-  gem 'minitest-reporters', '1.0.5'
-  gem 'guard-minitest', '2.3.1'
+  gem 'guard-rspec'
+  gem 'rspec-pride'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails', '4.5.0'
   gem 'capybara'
 end
 
