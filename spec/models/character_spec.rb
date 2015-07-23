@@ -8,7 +8,10 @@ RSpec.describe Character, type: :model do
 
   it { is_expected.to be_valid }
 
+  # Owning model
   it { is_expected.to respond_to :user }
+
+  # Fluff
   it { is_expected.to respond_to :name }
   it { is_expected.to respond_to :nickname }
   it { is_expected.to respond_to :experience }
@@ -24,23 +27,39 @@ RSpec.describe Character, type: :model do
   it { is_expected.to respond_to :weight }
   it { is_expected.to respond_to :eyes }
   it { is_expected.to respond_to :hair }
+  it { is_expected.to respond_to :favored_class }
+  it { is_expected.to respond_to :hitpoints }
+
+  # Base stat block
   it { is_expected.to respond_to :strength }
   it { is_expected.to respond_to :dexterity }
   it { is_expected.to respond_to :constitution }
   it { is_expected.to respond_to :intelligence }
   it { is_expected.to respond_to :wisdom }
   it { is_expected.to respond_to :charisma }
-  it { is_expected.to respond_to :favored_class }
-  it { is_expected.to respond_to :hitpoints }
   it { is_expected.to respond_to :fortitude }
+  it { is_expected.to respond_to :reflex }
+  it { is_expected.to respond_to :will }
+  
+  # Movable speeds
   it { is_expected.to respond_to :land_speed }
   it { is_expected.to respond_to :flight_speed }
   it { is_expected.to respond_to :swim_speed }
-  it { is_expected.to respond_to :reflex }
-  it { is_expected.to respond_to :will }
-  it { is_expected.to respond_to :perception }
+
+  # Skills
+  skills = %w[ acrobatics appraise bluff climb diplomacy disguise
+                     escape_artist fly heal intimidate perception ride
+                     sense_motive stealth survival swim track disable_device
+                     handle_animal linguistics sleight_of_hand spellcraft
+                     use_magic_device ]
+
+  skills.each do |skill|
+    it { is_expected.to respond_to skill }
+    it { is_expected.to respond_to "#{skill}_rank" }
+  end
+
+  # Other embedded models
   it { is_expected.to respond_to :combat_block }
-  it { is_expected.to respond_to :skillset }
   it { is_expected.to respond_to :equipments }
   it { is_expected.to respond_to :inventory }
   it { is_expected.to respond_to :effects }
@@ -108,7 +127,7 @@ RSpec.describe Character, type: :model do
     end
 
     specify "has calculable perception" do
-      subject.skillset.perception = 1
+      subject.perception_rank = 1
       subject.wisdom = 12
       expect(subject.perception).to eq 2
     end

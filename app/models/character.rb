@@ -1,15 +1,14 @@
 class Character
   include Mongoid::Document
   include BaseStatBlocked
+  include Skilled
   include Movable
   belongs_to :user
   embeds_one :combat_block
-  embeds_one :skillset
   embeds_one :inventory
   embeds_many :equipments
   embeds_many :effects
   embeds_many :conditions
-  accepts_nested_attributes_for :skillset
   field :name, type: String
   field :nickname, type: String
   field :experience, type: Integer
@@ -30,8 +29,4 @@ class Character
   field :fortitude, type: Integer
   field :reflex, type: Integer
   field :will, type: Integer
-
-  def perception
-    self.skillset.perception + self.wisdom_mod
-  end
 end
