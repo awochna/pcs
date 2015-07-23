@@ -19,6 +19,10 @@ FactoryGirl.define do
     wisdom 9
     charisma 12
     favored_class "Warrior"
+    skillset { FactoryGirl.build(:skillset) }
+    land_speed { FactoryGirl.build(:land_speed) }
+    flight_speed { FactoryGirl.build(:no_flight_speed) }
+    swim_speed { FactoryGirl.build(:swim_speed) }
   end
 
 end

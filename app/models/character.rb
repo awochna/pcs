@@ -1,6 +1,7 @@
 class Character
   include Mongoid::Document
   include BaseStatBlocked
+  include Movable
   belongs_to :user
   embeds_one :combat_block
   embeds_one :skillset
@@ -8,7 +9,6 @@ class Character
   embeds_many :equipments
   embeds_many :effects
   embeds_many :conditions
-  embeds_many :speeds
   accepts_nested_attributes_for :skillset
   field :name, type: String
   field :nickname, type: String

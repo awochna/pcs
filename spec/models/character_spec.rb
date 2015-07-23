@@ -32,8 +32,10 @@ RSpec.describe Character, type: :model do
   it { is_expected.to respond_to :charisma }
   it { is_expected.to respond_to :favored_class }
   it { is_expected.to respond_to :hitpoints }
-  it { is_expected.to respond_to :speeds }
   it { is_expected.to respond_to :fortitude }
+  it { is_expected.to respond_to :land_speed }
+  it { is_expected.to respond_to :flight_speed }
+  it { is_expected.to respond_to :swim_speed }
   it { is_expected.to respond_to :reflex }
   it { is_expected.to respond_to :will }
   it { is_expected.to respond_to :perception }
@@ -50,43 +52,36 @@ RSpec.describe Character, type: :model do
 
       specify "for strength" do
         subject.strength = 18
-        subject.save
         expect(subject.strength_mod).to eq 4
       end
 
       specify "for dexterity" do
         subject.dexterity = 12
-        subject.save
         expect(subject.dexterity_mod).to eq 1
       end
 
       specify "for constitution" do
         subject.constitution = 16
-        subject.save
         expect(subject.constitution_mod).to eq 3
       end
 
       specify "for intelligence" do
         subject.intelligence = 10
-        subject.save
         expect(subject.intelligence_mod).to eq 0
       end
 
       specify "for wisdom" do
         subject.wisdom = 8
-        subject.save
         expect(subject.wisdom_mod).to eq -1
       end
 
       specify "for charisma" do
         subject.charisma = 14
-        subject.save
         expect(subject.charisma_mod).to eq 2
       end
 
       specify "when attribute is an odd number" do
         subject.strength = 19
-        subject.save
         expect(subject.strength_mod).to eq 4
       end
     end
@@ -96,21 +91,18 @@ RSpec.describe Character, type: :model do
       specify "for fortitude" do
         subject.constitution = 16
         subject.fortitude = 2
-        subject.save
         expect(subject.calculated_fortitude).to eq 5
       end
 
       specify "for reflex" do
         subject.dexterity = 12
         subject.reflex = 2
-        subject.save
         expect(subject.calculated_reflex).to eq 3
       end
 
       specify "for will" do
         subject.wisdom = 8
         subject.will = 1
-        subject.save
         expect(subject.calculated_will).to eq 0
       end
     end
@@ -118,7 +110,6 @@ RSpec.describe Character, type: :model do
     specify "has calculable perception" do
       subject.skillset.perception = 1
       subject.wisdom = 12
-      subject.save
       expect(subject.perception).to eq 2
     end
   end
