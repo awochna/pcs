@@ -14,6 +14,17 @@
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
+//= require jquery
+//= require jquery_ujs
+//= require ember
+//= require ember-data
+//= require active-model-adapter
+//= require_self
+//= require ./pcs2
+
+// for more details see: http://emberjs.com/guides/application/
+Pcs2 = Ember.Application.create();
+
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
